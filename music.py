@@ -7,7 +7,7 @@ from discord import opus
 
 
 bot = commands.Bot(command_prefix='.')
-YOUTUBE_API = 'YOUR YOUTUBE API TOKEN HERE'
+YOUTUBE_API = 'AIzaSyDQGuX9dXBM9uKKeL0wzxeDGpwLFUrTNng'
 
 
 bot.remove_command('help')
@@ -306,4 +306,4 @@ async def songs(msg):
             await bot.say("Currently no songs in queue")
 
 
-bot.run('YUR BOT TOKEN HERE')
+bot.run('NjkzODQ2NzQ4ODI0ODYyNzcw.XspZ7Q.F3DsuxvVUSmY_pVShEl3OfWq05o')
