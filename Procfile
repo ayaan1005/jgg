@@ -1,1 +1,1 @@
-worker: python music.py
+bot: npm start
