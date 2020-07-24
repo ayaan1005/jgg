@@ -3,26 +3,74 @@ const { MESSAGE_EMBED } = require('../common/constants');
 const prefix = process.env.PREFIX || require('../../config/settings.json').prefix;
 
 module.exports = {
-  name: 'help0',
+  name: '585',
   description: 'Display a help message with all the available commands.',
   emoji: ':question:',
-  execute(message, options) {
-    const { commands } = options;
-    const orderedCommands = ['say', 'aeiou', 'stop', 'lang', 'langs', 'speed', 'help'];
+  execute(message, options, args) {
+       let user = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(r => r.user.username.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.guild.members.cache.find(ro => ro.displayName.toLowerCase() === args.join(' ').toLocaleLowerCase()) || message.member;
 
-    const helpMessage = orderedCommands.reduce((commandsList, commandName) => {
-      const command = commands.get(commandName);
-      commandsList += `${command.emoji} **${prefix}${command.name}** - ${command.description}\n`;
-      return commandsList;
-    }, '');
+        if (!user.presence.activities.length) {
+            const sembed = new MessageEmbed()
+                .setAuthor(user.user.username, user.user.displayAvatarURL({ dynamic: true }))
+                .setColor("GREEN")
+                .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+                .addField("**No Status**", 'This user does not have any custom status!')
+                .setFooter(message.guild.name, message.guild.iconURL({ dynamic: true }))
+                .setTimestamp()
+            message.channel.send(sembed)
+            return undefined;
+        }
 
-    const embed = new MessageEmbed()
-      .setTitle('Text-to-Speech Help Message')
-      .setColor(MESSAGE_EMBED.color)
-      .setThumbnail(MESSAGE_EMBED.helpThumbnail)
-      .addField('List of available commands:', helpMessage)
-      .addField('Spotted a bug?', `This bot is far from perfect, so in case you found a bug, please report it in this bot's [**GitHub Issues Page**](${MESSAGE_EMBED.helpURL}).`);
-    
-    message.channel.send(embed);
+        user.presence.activities.forEach((activity) => {
+
+            if (activity.type === 'CUSTOM_STATUS') {
+                const embed = new MessageEmbed()
+                    .setAuthor(user.user.username, user.user.displayAvatarURL({ dynamic: true }))
+                    .setColor("GREEN")
+                    .addField("**Status**", `**Custom status** -\n${activity.emoji || "No Emoji"} | ${activity.state}`)
+                    .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+                    .setFooter(message.guild.name, message.guild.iconURL({ dynamic: true }))
+                    .setTimestamp()
+                message.channel.send(embed)
+            }
+            else if (activity.type === 'PLAYING') {
+                let name1 = activity.name
+                let details1 = activity.details
+                let state1 = activity.state
+                let image = user.user.displayAvatarURL({ dynamic: true })
+
+                const sembed = new MessageEmbed()
+                    .setAuthor(`${user.user.username}'s Activity`)
+                    .setColor(0xFFFF00)
+                    .setThumbnail(image)
+                    .addField("**Type**", "Playing")
+                    .addField("**App**", `${name1}`)
+                    .addField("**Details**", `${details1 || "No Details"}`)
+                    .addField("**Working on**", `${state1 || "No Details"}`)
+                message.channel.send(sembed);
+            }
+            else if (activity.type === 'LISTENING' && activity.name === 'Spotify' && activity.assets !== null) {
+
+                let trackIMG = `https://i.scdn.co/image/${activity.assets.largeImage.slice(8)}`;
+                let trackURL = `https://open.spotify.com/track/${activity.syncID}`;
+
+                let trackName = activity.details;
+                let trackAuthor = activity.state;
+                let trackAlbum = activity.assets.largeText;
+
+                trackAuthor = trackAuthor.replace(/;/g, ",")
+
+                const embed = new MessageEmbed()
+                    .setAuthor('Spotify Track Info', 'https://cdn.discordapp.com/emojis/408668371039682560.png')
+                    .setColor("GREEN")                
+                    .setThumbnail(trackIMG)
+                    .addField('Song Name', trackName, true)
+                    .addField('Album', trackAlbum, true)
+                    .addField('Author', trackAuthor, false)
+                    .addField('Listen to Track', `${trackURL}`, false)
+                    .setFooter(user.displayName, user.user.displayAvatarURL({ dynamic: true }))
+                message.channel.send(embed);
+            }
+        })
   }
 }

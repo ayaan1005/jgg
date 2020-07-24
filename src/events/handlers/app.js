@@ -47,7 +47,7 @@ const handleMessage = (message, client) => {
     commands: client.commands
   };
 
-  executeCommand(client, message, options, command);
+  executeCommand(client, message, options, command, args);
 };
 
 const handleReady = (client) => {
