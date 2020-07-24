@@ -1,1 +1,1 @@
-worker: node src/app.js
+bot: npm start
