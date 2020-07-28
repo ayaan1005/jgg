@@ -10,12 +10,6 @@ module.exports = {
   description: `Send a TTS message in your voice channel${allowOver200 ? '.' : ' (Up to 200 characters).'}`,
   emoji: ':speaking_head:',
   execute(message, options) {
-    const bb = new MessageEmbed()
-    .setColor("RANDOM")
-    .setTitle("Command Disable!")
-    .setDescription("This Command Is Currently Disabled By Developers")
-    .setFooter("It Will Be Enabled As Soon As Possible")
-    return message.channel.send(bb)
     
     const { channel } = message.member.voice;
     const { ttsPlayer, name: guildName, voice } = message.guild;

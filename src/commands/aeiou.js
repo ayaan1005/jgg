@@ -7,12 +7,6 @@ module.exports = {
   description: 'Send an aeiou (similar to Moonbase Alpha) TTS message in your voice channel.',
   emoji: ':robot:',
   execute(message, options) {
-        const bb = new MessageEmbed()
-    .setColor("RANDOM")
-    .setTitle("Command Disable!")
-    .setDescription("This Command Is Currently Disabled By Developers")
-    .setFooter("It Will Be Enabled As Soon As Possible")
-    return message.channel.send(bb)
     const { channel } = message.member.voice;
     const { ttsPlayer, name: guildName, voice } = message.guild;
     const connection = voice ? voice.connection : null;
