@@ -1,9 +1,3 @@
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT)
 
 const { Client, Collection, Structures } = require('discord.js');
 const fs = require('fs-extra');
