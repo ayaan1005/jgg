@@ -6,6 +6,6 @@
   * [Modifying A Server](hosting/modify_server.md)
   * [Creating Account](hosting/creating-account.md)
 * [Bot List Helps](bot_list_help/README.md)
+  * [Log In](bot_list_help/log-in.md)
   * [Add Your Bot!](bot_list_help/add-your-bot.md)
-* [Loggin-IN](loggin-in.md)
 
