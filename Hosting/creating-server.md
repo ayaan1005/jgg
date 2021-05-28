@@ -10,7 +10,7 @@ Login To The **Dashboard**<br>
 <br>`4.` Select Your Specification Of Your Pterodactyl Server.<br>**Free Plane**<br>```RAM  :  1024MB,
 DISK :  2048MB,
 CPU  :  50%```<br>
-`4.` After Choosing The Specifications Click On **Create** Button.<br>
-`5.` Your Have Successfully Created Pterodactyl Server 🎉, **[Panel](https://panel.guitarhost.tech)**
+`5.` After Choosing The Specifications Click On **Create** Button.<br>
+`6.` Your Have Successfully Created Pterodactyl Server 🎉, **[Panel](https://panel.guitarhost.tech)**
 
 ### __**ENJOY**__
